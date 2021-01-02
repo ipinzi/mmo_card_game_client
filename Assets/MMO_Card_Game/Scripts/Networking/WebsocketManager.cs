@@ -10,6 +10,9 @@ namespace MMO_Card_Game.Scripts.Networking
     {
         public string ip = "localhost";
         public string port = "4000";
+
+        public bool debugMode = false;
+        
         private WebSocket _websocket;
         private bool _isConnected = false;
         private bool _isShuttingDown = false;
@@ -65,6 +68,7 @@ namespace MMO_Card_Game.Scripts.Networking
             _websocket.OnMessage += (bytes) =>
             {
                 var str = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                if(debugMode) Debug.Log("Server: "+str);
                 _commandInterpreter.InterpretCommand(str);
             };
 

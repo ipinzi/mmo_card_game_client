@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Dynamic;
 using System.Linq;
 using MMO_Card_Game.Scripts.Player;
 using MMO_Card_Game.Scripts.UI;
@@ -13,11 +15,16 @@ namespace MMO_Card_Game.Scripts.Networking
     {
         private WebsocketManager _websocketManager;
         private GameManager _gameManager;
+        private bool _sceneLoaded = false;
         public CommandInterpreter(WebsocketManager websocketManager)
         {
             _websocketManager = websocketManager;
             _gameManager = _websocketManager.GetComponent<GameManager>();
 
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                _sceneLoaded = true;
+            };
         }
         public void InterpretCommand(string jsonString)
         {
@@ -52,30 +59,34 @@ namespace MMO_Card_Game.Scripts.Networking
                         break;
                     
                     case "setUser":
+
                         var setUserPacket = JsonUtility.FromJson<SetUserDataPacket>(jsonString);
-                        SceneManager.LoadScene(setUserPacket.zone);
-                        Debug.Log("Adding player at "+ setUserPacket.position);
-                        SceneManager.sceneLoaded += (scene, mode) =>
+                        LoadScene(setUserPacket.zone);
+                        
+                        _websocketManager.StartCoroutine(WaitForSceneLoaded(() => 
                         {
+                            Debug.Log("Adding player at "+ setUserPacket.position);
                             var player = Object.Instantiate(_gameManager.playerPrefab,
                                 setUserPacket.position,
                                 Quaternion.identity).GetComponent<Pawn>();
                             player.name = "Player: "+setUserPacket.user+" ("+setUserPacket.id+")";
                             player.username = setUserPacket.user;
                             player.id = setUserPacket.id;
-                            
-                            SceneManager.sceneLoaded -= null;
-                        };
+                        }));
                         break;
                     case "populate":
                         var popPacket = JsonUtility.FromJson<PopulateDataPacket>(jsonString);
-                        var pawn = Object.Instantiate(_gameManager.playerPrefab,
-                            popPacket.position,
-                            Quaternion.identity).GetComponent<Pawn>();
-                        pawn.isLocalPlayer = false;
-                        pawn.username = popPacket.user;
-                        pawn.id = popPacket.id;
-                        _gameManager.pawns.Add(pawn);
+                        _websocketManager.StartCoroutine(WaitForSceneLoaded(() => 
+                        {
+                            var pawn = Object.Instantiate(_gameManager.playerPrefab,
+                                popPacket.position,
+                                Quaternion.identity).GetComponent<Pawn>();
+                            pawn.isLocalPlayer = false;
+                            pawn.name = "Player: "+popPacket.user+" ("+popPacket.id+")";
+                            pawn.username = popPacket.user;
+                            pawn.id = popPacket.id;
+                            _gameManager.pawns.Add(pawn);
+                        }));
                         break;
                     case "pos":
                         var posPacket = JsonUtility.FromJson<PositionDataPacket>(jsonString);
@@ -92,6 +103,22 @@ namespace MMO_Card_Game.Scripts.Networking
             {
                 Debug.Log($"Server : {jsonString}");
             }
+        }
+
+        private IEnumerator WaitForSceneLoaded(Action callbackFunc)
+        {
+            while (!_sceneLoaded)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            callbackFunc();
+        }
+
+        private void LoadScene(int buildIndex)
+        {
+            _sceneLoaded = false;
+            SceneManager.LoadScene(buildIndex);
         }
     }
     
