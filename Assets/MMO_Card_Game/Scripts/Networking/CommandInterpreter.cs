@@ -88,6 +88,15 @@ namespace MMO_Card_Game.Scripts.Networking
                             _gameManager.pawns.Add(pawn);
                         }));
                         break;
+                    case "despawn":
+                        var dsPacket = JsonUtility.FromJson<DespawnPacket>(jsonString);
+                        
+                        foreach (var p in _gameManager.pawns.Where(p => p.id == dsPacket.id))
+                        {
+                            Object.Destroy(p.gameObject);
+                        }
+
+                        break;
                     case "pos":
                         var posPacket = JsonUtility.FromJson<PositionDataPacket>(jsonString);
 
@@ -121,7 +130,8 @@ namespace MMO_Card_Game.Scripts.Networking
             SceneManager.LoadScene(buildIndex);
         }
     }
-    
+
+
     //Incoming Data Packets
     [Serializable]
     public class DataPacket
@@ -155,6 +165,11 @@ namespace MMO_Card_Game.Scripts.Networking
         public string id;
         public string user;
         public Vector3 position;
+    }
+    [Serializable]
+    public class DespawnPacket : DataPacket
+    {
+        public string id;
     }
     [Serializable]
     public class PositionDataPacket : DataPacket
