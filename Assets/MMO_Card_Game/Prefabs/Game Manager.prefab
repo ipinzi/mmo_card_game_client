@@ -46,7 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8646243480106416078, guid: e80c072b7734bd44eb59b9671bbfb8ad,
     type: 3}
-  npcsModel: {fileID: 11400000, guid: 26c144e77920a204686a5a8e98955045, type: 2}
+  pawns: []
+  commands:
+  - {fileID: 11400000, guid: 13b5250b87574d04088f954277e9c9b5, type: 2}
+  - {fileID: 11400000, guid: 58cfe53ce4c9202469ad621338a906f5, type: 2}
+  - {fileID: 11400000, guid: ae8924df9a6c6db48a140bd8a1ecd1cf, type: 2}
+  - {fileID: 11400000, guid: a5e46a2ef01c2674a84895a55eadcfba, type: 2}
+  - {fileID: 11400000, guid: 030b266c41169a2408440b4f299860e5, type: 2}
+  - {fileID: 11400000, guid: e0ab29e7f57d85549a91e5ae5a1be557, type: 2}
 --- !u!114 &6123653879530360286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,3 +68,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ip: localhost
   port: 4000
+  commands: []
+  debugMode: 0

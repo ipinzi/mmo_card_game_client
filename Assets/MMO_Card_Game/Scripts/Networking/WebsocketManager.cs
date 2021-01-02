@@ -1,8 +1,6 @@
 ﻿using System.Text;
 using NativeWebSocket;
 using UnityEngine;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace MMO_Card_Game.Scripts.Networking
 {
@@ -89,20 +87,21 @@ namespace MMO_Card_Game.Scripts.Networking
         {
             if (_websocket.State != WebSocketState.Open) return;
 
-            var json = MakeJsonFromString("{'cmd': 'login', 'data': {'user': 'ben', 'pass': 'dragonbz'}}");
+            /*var json = MakeJsonFromString("{'cmd': 'login', 'data': {'user': 'ben', 'pass': 'dragonbz'}}");
             dynamic jsonData = JObject.Parse(json);
             Debug.Log(jsonData.data.user);
         
             // Sending plain text
             await _websocket.SendText("plain text message");
-            await _websocket.SendText(json);
+            await _websocket.SendText(json);*/
         }
 
-        public async void SendData(JObject json)
+        /*public async void SendData(JObject json)
         {
             var jsonStr = JsonConvert.SerializeObject(json);
             await _websocket.SendText(jsonStr);
-        }
+        }*/
+        
         public async void SendData(string json)
         {
             var str = MakeJsonFromString(json);
