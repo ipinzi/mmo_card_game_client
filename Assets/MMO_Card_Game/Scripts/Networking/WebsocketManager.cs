@@ -6,10 +6,7 @@ namespace MMO_Card_Game.Scripts.Networking
 {
     public class WebsocketManager : MonoBehaviour
     {
-        public string ip = "localhost";
-        public string port = "4000";
-
-        public bool debugMode = false;
+        public NetworkSettings networkSettings;
         
         private WebSocket _websocket;
         private bool _isConnected = false;
@@ -18,6 +15,11 @@ namespace MMO_Card_Game.Scripts.Networking
 
         private void Awake()
         {
+            if (!networkSettings)
+            {
+                Debug.LogError("No network settings attached to websocket manager.");
+            }
+            
             var wsManagers = FindObjectsOfType<WebsocketManager>();
             if (wsManagers.Length > 1)
             {
@@ -41,7 +43,7 @@ namespace MMO_Card_Game.Scripts.Networking
         {
             if (_websocket != null) await _websocket.Close();
             
-            _websocket = new WebSocket($"ws://{ip}:{port}");
+            _websocket = new WebSocket($"ws://{networkSettings.ip}:{networkSettings.port}");
 
             _websocket.OnOpen += () =>
             {
@@ -53,7 +55,7 @@ namespace MMO_Card_Game.Scripts.Networking
             _websocket.OnError += (e) =>
             {
                 Debug.Log("Error! " + e);
-                if (!_isShuttingDown && !_isConnected) Invoke(nameof(ConnectToServer), 2f);
+                //if (!_isShuttingDown && !_isConnected) Invoke(nameof(ConnectToServer), 2f);
             };
 
             _websocket.OnClose += (e) =>
@@ -66,7 +68,7 @@ namespace MMO_Card_Game.Scripts.Networking
             _websocket.OnMessage += (bytes) =>
             {
                 var str = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-                if(debugMode) Debug.Log("Server: "+str);
+                if(networkSettings.debugMode) Debug.Log("Server: "+str);
                 _commandInterpreter.InterpretCommand(str);
             };
 
@@ -83,7 +85,7 @@ namespace MMO_Card_Game.Scripts.Networking
         }
         
         //test message
-        private async void SendWebSocketMessage()
+        /*private async void SendWebSocketMessage()
         {
             if (_websocket.State != WebSocketState.Open) return;
 
@@ -93,10 +95,10 @@ namespace MMO_Card_Game.Scripts.Networking
         
             // Sending plain text
             await _websocket.SendText("plain text message");
-            await _websocket.SendText(json);*/
+            await _websocket.SendText(json);
         }
 
-        /*public async void SendData(JObject json)
+        public async void SendData(JObject json)
         {
             var jsonStr = JsonConvert.SerializeObject(json);
             await _websocket.SendText(jsonStr);
@@ -104,6 +106,12 @@ namespace MMO_Card_Game.Scripts.Networking
         
         public async void SendData(string json)
         {
+            if (!_isConnected)
+            {
+                Debug.Log("Client is not connected to the server!");
+                return;
+            } 
+            
             var str = MakeJsonFromString(json);
             await _websocket.SendText(str);
         }

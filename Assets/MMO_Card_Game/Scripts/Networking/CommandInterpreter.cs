@@ -20,8 +20,9 @@ namespace MMO_Card_Game.Scripts.Networking
             try
             {
                 var jsonData = JsonUtility.FromJson<DataPacket>(jsonString);
+                var commands = _gameManager.networkSettings.commands;
 
-                foreach (var command in _gameManager.commands.Where(command => jsonData.cmd == command.cmd))
+                foreach (var command in commands.Where(command => jsonData.cmd == command.cmd))
                 {
                     command.RunCommand(_gameManager, jsonString);
                 }

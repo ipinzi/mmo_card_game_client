@@ -12,7 +12,7 @@ namespace MMO_Card_Game.Scripts.Networking.Commands
         }
         public override void RunCommand(GameManager gameManager, string jsonString)
         {
-            var loginPacket = JsonUtility.FromJson<LoginCommand.LoginDataPacket>(jsonString);
+            var loginPacket = JsonUtility.FromJson<LoginDataPacket>(jsonString);
             Debug.Log(loginPacket.message);
             GameObject.FindWithTag("FormFeedback").GetComponent<TMP_Text>().text = loginPacket.message;
 

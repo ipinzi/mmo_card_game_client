@@ -1,6 +1,4 @@
 ﻿using MMO_Card_Game.Scripts.Player;
-using MMO_Card_Game.Scripts.UI;
-using TMPro;
 using UnityEngine;
 
 namespace MMO_Card_Game.Scripts.Networking.Commands

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MMO_Card_Game.Scripts.Networking;
 using MMO_Card_Game.Scripts.Networking.Commands;
 using MMO_Card_Game.Scripts.Player;
 using UnityEngine;
@@ -12,11 +13,16 @@ namespace MMO_Card_Game.Scripts
     {
         public GameObject playerPrefab;
         public List<Pawn> pawns;
-        public List<Command> commands;
+        public NetworkSettings networkSettings;
         private bool _sceneLoaded = false;
 
         private void Awake()
         {
+            if (!networkSettings)
+            {
+                Debug.LogError("No network settings attached to game manager.");
+            }
+            
             pawns = new List<Pawn>();
 
             SceneManager.sceneLoaded += (scene, mode) =>

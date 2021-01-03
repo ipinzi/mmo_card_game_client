@@ -1,5 +1,4 @@
-﻿using System.Timers;
-using MMO_Card_Game.Scripts.Networking;
+﻿using MMO_Card_Game.Scripts.Networking;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,17 +37,9 @@ namespace MMO_Card_Game.Scripts.Player
                 }
             }
 
-            if (!isLocalPlayer) return;
-            //player controls here
-            
-            if (Input.GetButtonDown("Fire1"))
+            if (!isLocalPlayer)
             {
-                var cam = Camera.main;
-                var ray = cam.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit))
-                {
-                    _navAgent.destination = hit.point;
-                }
+                Destroy(GetComponent<PlayerController>());
             }
         }
 
