@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MMO_Card_Game/Scenes/Zones/Zone1.unity
     guid: 24e695b88cc78bb4a94b3383b884d1bc
+  - enabled: 1
+    path: Assets/MMO_Card_Game/Scenes/Zones/Zone2.unity
+    guid: 83d31d8b05f23d04ea18ed3847254033
   m_configObjects: {}

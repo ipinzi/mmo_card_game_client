@@ -56,9 +56,14 @@ namespace MMO_Card_Game.Scripts.Player
         private void SendPosition()
         {
             //if this pawn is the local player then send our position to the server to sync this player
-            if(_wsManager && isLocalPlayer) _wsManager.SendData(
-                "{'cmd': 'pos', 'data': {'x': '"+transform.position.x+"','y': '"+transform.position.y+"','z': '"+transform.position.z+"'}}"
-            );
+            if (!_wsManager || !isLocalPlayer) return;
+            
+            var pos = transform.position;
+            var posPacket = new CommandDataObject("pos");
+            posPacket.AddData("x",pos.x);
+            posPacket.AddData("y",pos.y);
+            posPacket.AddData("z",pos.z);
+            _wsManager.SendData(posPacket.Data());
         }
     }
 }

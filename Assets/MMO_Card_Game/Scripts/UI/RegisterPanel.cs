@@ -32,15 +32,11 @@ namespace MMO_Card_Game.Scripts.UI
         }
         private void Submit()
         {
-            /*dynamic jsonData = new JObject();
-            jsonData.cmd = "register";
-            
-            jsonData.data = new JObject();
-            jsonData.data.username = userField.text;
-            jsonData.data.email = emailField.text;
-            jsonData.data.password = passField.text;*/
-            
-            FindObjectOfType<WebsocketManager>().SendData("{'cmd': 'register', 'data': {'username': '"+userField.text+"', 'email': '"+emailField.text+"', 'password': '"+passField.text+"'}}");
+            var registerPacket = new CommandDataObject("register");
+            registerPacket.AddData("username", userField.text);
+            registerPacket.AddData("email", emailField.text);
+            registerPacket.AddData("password", passField.text);
+            FindObjectOfType<WebsocketManager>().SendData(registerPacket.Data());
         }
         private void Back()
         {

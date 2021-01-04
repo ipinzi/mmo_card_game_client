@@ -6,6 +6,9 @@ namespace MMO_Card_Game.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public float interactionDistance = 2f;
+        
+        private Transform _target;
         private NavMeshAgent _navAgent;
         private void Awake()
         {
@@ -21,12 +24,16 @@ namespace MMO_Card_Game.Scripts.Player
                 if (Physics.Raycast(ray, out var hit))
                 {
                     _navAgent.destination = hit.point;
-                    var interaction = hit.transform.GetComponent<Interaction>();
-                    if (interaction)
-                    {
-                        interaction.RunInteraction();
-                    }
+                    var interaction = hit.collider.GetComponentInParent<Interaction>();
+                    if (interaction) _target = interaction.transform;
                 }
+            }
+            if (_target && Vector3.SqrMagnitude(_target.position - transform.position) < interactionDistance)
+            {
+                Debug.Log("Trying to run interaction");
+                var interaction = _target.GetComponent<Interaction>();
+                interaction.RunInteraction();
+                _target = null;
             }
         }
     }

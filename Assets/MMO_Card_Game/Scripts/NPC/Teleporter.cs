@@ -16,7 +16,15 @@ namespace MMO_Card_Game.Scripts.NPC
 
         public void Teleport()
         {
-            FindObjectOfType<WebsocketManager>().SendData("{'cmd': 'teleport', 'data': {'zone': '"+toZone+"', 'x': '"+toPosition.x+", 'y': '"+toPosition.y+", 'z': '"+toPosition.z+"'}}");
+            var telePacket = new CommandDataObject("teleport");
+            telePacket.AddData("zone", toZone);
+            telePacket.AddData("x", toPosition.x);
+            telePacket.AddData("y", toPosition.y);
+            telePacket.AddData("z", toPosition.z);
+            
+            var wsMan = FindObjectOfType<WebsocketManager>();
+            wsMan.SendData(telePacket.Data());
+            wsMan.GetComponent<GameManager>().LoadScene(toZone);
         }
     }
 }
