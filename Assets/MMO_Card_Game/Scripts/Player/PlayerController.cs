@@ -10,6 +10,7 @@ namespace MMO_Card_Game.Scripts.Player
         
         private Transform _target;
         private NavMeshAgent _navAgent;
+        
         private void Awake()
         {
             _navAgent = GetComponent<NavMeshAgent>();

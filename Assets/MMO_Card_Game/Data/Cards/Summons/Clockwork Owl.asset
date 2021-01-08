@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c084f51f324442cb974a52c937f6b699, type: 3}
+  m_Name: Clockwork Owl
+  m_EditorClassIdentifier: 
+  id: 0aef3775-b386-43d0-b80b-94e367bf4e50
+  cardName: Clockwork Owl
+  cardText: 
+  cardImage: {fileID: 21300000, guid: 5680718d36727bc41b967e241fb7f85a, type: 3}
+  cardType: summon
+  attack: 0
+  defense: 0
+  summonType: 0

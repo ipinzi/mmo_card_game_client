@@ -36,6 +36,7 @@ namespace MMO_Card_Game.Scripts.Networking
         // Start is called before the first frame update
         private void Start()
         {
+            Game.Network = this;
             ConnectToServer();
         }
 

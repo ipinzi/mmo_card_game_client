@@ -16,6 +16,7 @@ namespace MMO_Card_Game.Scripts.Networking.Commands
                         
             foreach (var p in gameManager.pawns.Where(p => p.id == dsPacket.id))
             {
+                gameManager.pawns.Remove(p);
                 Destroy(p.gameObject);
             }
         }

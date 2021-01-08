@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e057305ddda934ca147ed0c95345ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardDatabase: {fileID: 11400000, guid: 19b4fa924f060474587e92bd0a82802a, type: 2}
   playerPrefab: {fileID: 8646243480106416078, guid: e80c072b7734bd44eb59b9671bbfb8ad,
     type: 3}
   pawns: []

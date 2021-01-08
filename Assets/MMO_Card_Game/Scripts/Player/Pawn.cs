@@ -1,4 +1,5 @@
-﻿using MMO_Card_Game.Scripts.Networking;
+﻿using Cinemachine;
+using MMO_Card_Game.Scripts.Networking;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,6 +40,7 @@ namespace MMO_Card_Game.Scripts.Player
 
             if (!isLocalPlayer)
             {
+                Destroy(GetComponentInChildren<CinemachineVirtualCamera>().gameObject);
                 Destroy(GetComponent<PlayerController>());
             }
         }
