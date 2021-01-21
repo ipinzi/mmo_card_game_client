@@ -10,6 +10,9 @@ namespace MMO_Card_Game.Scripts.Cards
     [CreateAssetMenu(menuName = "MMO Card Game/Card Database", fileName = "Card Database", order = 0)]
     public class CardDatabase : ScriptableObject
     {
+        [InfoBox("This is the Card Database, all cards available in game should appear here. " +
+                 "If for some reason a card is not available in this list then you can add it from the [Cards/Card Type] " +
+                 "dropdown in explorer view on the left, otherwise it will not appear in the game or export in JSON.")]
         [Searchable, TableList(DrawScrollView = true, MinScrollViewHeight = 200),OnValueChanged(nameof(CheckDuplicates))]
         public List<Card> cards;
 
@@ -22,14 +25,14 @@ namespace MMO_Card_Game.Scripts.Cards
             cards = cards.Distinct().ToList();
         }
 
-
+        #if UNITY_EDITOR
         [Button("Export to JSON")]
         private void ExportToJson()
         {
             var path = EditorUtility.SaveFilePanel(
-                "Export Item Database Data as JSON",
+                "Export Card Database Data as JSON",
                 "",
-                "itemDatabase.json",
+                "cardDatabase.json",
                 "json");
 
             if (path.Length != 0)
@@ -41,6 +44,7 @@ namespace MMO_Card_Game.Scripts.Cards
                 Debug.Log("Card Database Json saved.");
             }
         }
+        #endif
         private CardDatabaseSerializableData ConvertToSeralizableData()
         {
             var cardsJsonData = new CardDatabaseSerializableData();

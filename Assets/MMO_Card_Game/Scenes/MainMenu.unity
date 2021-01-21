@@ -121,27 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &58275232 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5664512240859172780, guid: ce5aec34ee7b6b846bdb025f69d04f59,
-    type: 3}
-  m_PrefabInstance: {fileID: 5052058326145028387}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &58275236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 58275232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d2e3a45dbb348e1be65342b47f0a042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 0
-  cards: []
-  decks: []
 --- !u!1 &431358026
 GameObject:
   m_ObjectHideFlags: 0

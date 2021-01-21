@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Another Item Card
   m_EditorClassIdentifier: 
   id: fee16ff9-e510-4d26-8fda-3f194a9ac00e
-  cardName: Another Item
+  cardName: Another Item Card
   cardText: 
   cardImage: {fileID: 0}
   cardType: item

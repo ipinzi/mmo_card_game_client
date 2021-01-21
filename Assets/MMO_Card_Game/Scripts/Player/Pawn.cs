@@ -20,6 +20,11 @@ namespace MMO_Card_Game.Scripts.Player
         {
             _navAgent = GetComponent<NavMeshAgent>();
             _wsManager = FindObjectOfType<WebsocketManager>();
+
+            if (isLocalPlayer)
+            {
+                Game.LocalPlayer.pawn = this;
+            }
         }
         
         // Update is called once per frame

@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MMO_Card_Game.Editor;
 using MMO_Card_Game.Scripts.Cards;
-using Sirenix.OdinInspector.Demos.RPGEditor;
+using MMO_Card_Game.Scripts.Items;
+using MMO_Card_Game.Scripts.Quests;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -14,6 +17,8 @@ namespace Editor
         private object _selectedAsset;
         private string _nameString;
         private CardDatabase _cardDatabase;
+        private ItemDatabase _itemDatabase;
+        private QuestDatabase _questDatabase;
         
         [MenuItem("MMO Card Game/MMO Card Game Editor")]
         private static void OpenWindow()
@@ -37,15 +42,35 @@ namespace Editor
 
             _cardDatabase = (CardDatabase)AssetDatabase.LoadAssetAtPath("Assets/MMO_Card_Game/Data/Cards/Card Database.asset",
                 typeof(CardDatabase));
-            tree.AddAssetAtPath("Card Database", "Assets/MMO_Card_Game/Data/Cards/Card Database.asset",typeof(ScriptableObject));
-            tree.AddAllAssetsAtPath("Card Database", "Assets/MMO_Card_Game/Data/Cards/", typeof(Card), true)
+            _itemDatabase = (ItemDatabase)AssetDatabase.LoadAssetAtPath("Assets/MMO_Card_Game/Data/Items/Item Database.asset",
+                typeof(ItemDatabase));
+            _questDatabase = (QuestDatabase)AssetDatabase.LoadAssetAtPath("Assets/MMO_Card_Game/Data/Quests/Quest Database.asset",
+                typeof(QuestDatabase));
+            
+            tree.AddAssetAtPath("Cards", "Assets/MMO_Card_Game/Data/Cards/Card Database.asset",typeof(ScriptableObject));
+            tree.AddAllAssetsAtPath("Cards", "Assets/MMO_Card_Game/Data/Cards/", typeof(Card), true)
                 .ForEach(this.AddDragHandles);
             
             tree.EnumerateTree().AddIcons<Card>(x => x.cardImage);
             
-            tree.Add("Card Database/Summons", new SummonCardsPane(_cardDatabase.cards));
-            tree.Add("Card Database/Equipment", new EquipmentCardsPane(_cardDatabase.cards));
-            tree.Add("Card Database/Items", new ItemCardsPane(_cardDatabase.cards));
+            tree.Add("Cards/Summons", new SummonMmoEditorPane(_cardDatabase.cards));
+            tree.Add("Cards/Equipment", new EquipmentMmoEditorPane(_cardDatabase.cards));
+            tree.Add("Cards/Items", new ItemMmoEditorPane(_cardDatabase.cards));
+            
+            
+            tree.AddAssetAtPath("Items", "Assets/MMO_Card_Game/Data/Items/Item Database.asset",typeof(ScriptableObject));
+            tree.AddAllAssetsAtPath("Items", "Assets/MMO_Card_Game/Data/Items/Items", typeof(Item), true)
+                .ForEach(this.AddDragHandles);
+            
+            tree.AddAssetAtPath("Quests", "Assets/MMO_Card_Game/Data/Quests/Quest Database.asset",typeof(ScriptableObject));
+            
+            tree.Add("Quests/Tasks", new TasksPane());
+            tree.AddAllAssetsAtPath("Quests/Tasks", "Assets/MMO_Card_Game/Data/Quests/Tasks", typeof(QuestTask), true)
+                .ForEach(this.AddDragHandles);
+            
+            tree.AddAssetAtPath("Quests/Quests", "Assets/MMO_Card_Game/Data/Quests/Quest Database.asset",typeof(ScriptableObject));
+            tree.AddAllAssetsAtPath("Quests/Quests", "Assets/MMO_Card_Game/Data/Quests/Quests", typeof(Quest), true)
+                .ForEach(this.AddDragHandles);
             
             return tree;
         }
@@ -74,7 +99,7 @@ namespace Editor
                 }
                 GUILayout.FlexibleSpace();
                 
-                if(selected.Name.Contains("Card Database")){
+                if(selected.Name.Contains("Cards")){
                     if (SirenixEditorGUI.ToolbarButton(new GUIContent("New Card")))
                     {
                         ScriptableObjectCreator.ShowDialog<Card>("Assets/MMO_Card_Game/Data/Cards", obj =>
@@ -83,7 +108,35 @@ namespace Editor
                             base.TrySelectMenuItemWithObject(obj);
                         });
                     }
-                    
+                }
+                if(selected.Name.Contains("Items")){
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("New Item")))
+                    {
+                        ScriptableObjectCreator.ShowDialog<Item>("Assets/MMO_Card_Game/Data/Items/Items", obj =>
+                        {
+                            _itemDatabase.items.Add(obj);
+                            base.TrySelectMenuItemWithObject(obj);
+                        });
+                    }
+                }
+                if(selected.Name.Contains("Quests")){
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("New Quest")))
+                    {
+                        ScriptableObjectCreator.ShowDialog<Quest>("Assets/MMO_Card_Game/Data/Quests/Quests", obj =>
+                        {
+                            _questDatabase.quests.Add(obj);
+                            base.TrySelectMenuItemWithObject(obj);
+                        });
+                    }
+                }
+                if(selected.Name.Contains("Quests")){
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("New Task")))
+                    {
+                        ScriptableObjectCreator.ShowDialog<QuestTask>("Assets/MMO_Card_Game/Data/Quests/Tasks", obj =>
+                        {
+                            base.TrySelectMenuItemWithObject(obj);
+                        });
+                    }
                 }
 
                 if (selected.Value == null) return;
@@ -136,8 +189,8 @@ namespace Editor
                 Borders = true,
                 BorderPadding = 13.00f,
                 BorderAlpha = 0.50f,
-                SelectedColorDarkSkin = new Color(0.708f, 0.210f, 0.642f, 1.000f),
-                SelectedColorLightSkin = new Color(0.755f, 0.231f, 0.682f, 1.000f)
+                SelectedColorDarkSkin = new Color(.36f, .85f, .29f, 1),
+                SelectedColorLightSkin = new Color(.36f, .85f, .29f, 1)
             };
         }
     }

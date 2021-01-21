@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb605edfccf54a4c9241aa7c8e3a516, type: 3}
-  m_Name: New Item Card
+  m_Script: {fileID: 11500000, guid: 9606cf923ab5428ca2702bf6b6aa0189, type: 3}
+  m_Name: Test Item
   m_EditorClassIdentifier: 
-  id: e74868fe-173d-4882-8282-ec92e90bbc88
-  cardName: New Item Card
-  cardText: 
-  cardImage: {fileID: 0}
-  cardType: item
+  id: 8f6a0e3d-b69f-4095-b4df-be85f7c78f79
+  itemName: Test Item
+  itemText: This is a Test item. W00t.
+  itemImage: {fileID: 21300000, guid: 8c5e5033fe838ef40989eeb85a513b7f, type: 3}
+  itemType: 

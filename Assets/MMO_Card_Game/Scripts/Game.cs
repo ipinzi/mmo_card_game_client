@@ -12,7 +12,7 @@ namespace MMO_Card_Game.Scripts
         
         public static IEnumerator WaitForLocalPlayer(Action callbackFunc)
         {
-            while (!Game.LocalPlayer)
+            while (!LocalPlayer)
             {
                 yield return false;
             }

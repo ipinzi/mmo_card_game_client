@@ -11,7 +11,7 @@ namespace MMO_Card_Game.Scripts.Cards
         [TableColumnWidth(10, true)]
         public string id = Guid.NewGuid().ToString();
         //[OnValueChanged(nameof(UpdateCardName))]
-        [TableColumnWidth(100, true)]
+        [TableColumnWidth(100, true), OnValueChanged(nameof(RenameAsset))]
         public string cardName;
         [TextArea]
         [TableColumnWidth(200, true)]
@@ -32,11 +32,12 @@ namespace MMO_Card_Game.Scripts.Cards
             if (t == typeof(EquipmentCard)) cardType = "equipment";
             if (t == typeof(ItemCard)) cardType = "item";
         }
-        private void UpdateCardName()
+        private void RenameAsset()
         {
-            var assetPath =  AssetDatabase.GetAssetPath(GetInstanceID());
-            AssetDatabase.RenameAsset(assetPath, cardName);
-            AssetDatabase.SaveAssets();
+            #if UNITY_EDITOR
+                var path = AssetDatabase.GetAssetPath(this);
+                AssetDatabase.RenameAsset(path, cardName);
+            #endif
         }
 
     }

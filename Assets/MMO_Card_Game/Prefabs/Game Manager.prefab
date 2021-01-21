@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6717903931920646316}
   - component: {fileID: -7657744504889231359}
   - component: {fileID: 6123653879530360286}
+  - component: {fileID: 58275236}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -45,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardDatabase: {fileID: 11400000, guid: 19b4fa924f060474587e92bd0a82802a, type: 2}
+  itemDatabase: {fileID: 11400000, guid: f7e6fa12d689d2e43855e02cf45320fe, type: 2}
+  questDatabase: {fileID: 11400000, guid: d8dae97fdc5569e4ba41db6f43bc5c70, type: 2}
   playerPrefab: {fileID: 8646243480106416078, guid: e80c072b7734bd44eb59b9671bbfb8ad,
     type: 3}
   pawns: []
@@ -62,3 +65,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkSettings: {fileID: 11400000, guid: f7d07791fbb9af9488b36a4b22cfd21d, type: 2}
+--- !u!114 &58275236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664512240859172780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2e3a45dbb348e1be65342b47f0a042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  cards: []
+  decks: []

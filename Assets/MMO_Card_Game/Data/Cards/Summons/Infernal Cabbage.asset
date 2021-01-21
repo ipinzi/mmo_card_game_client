@@ -18,5 +18,5 @@ MonoBehaviour:
   cardImage: {fileID: 21300000, guid: 22f630fc7752ede4d91b7a3414f30dad, type: 3}
   cardType: summon
   attack: 0
-  defense: 0
+  defense: 5
   summonType: 5

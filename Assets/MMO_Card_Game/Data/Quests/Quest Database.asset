@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb605edfccf54a4c9241aa7c8e3a516, type: 3}
-  m_Name: New Item Card
+  m_Script: {fileID: 11500000, guid: 3fe4a49794ab455a9532a880ad654f2d, type: 3}
+  m_Name: Quest Database
   m_EditorClassIdentifier: 
-  id: e74868fe-173d-4882-8282-ec92e90bbc88
-  cardName: New Item Card
-  cardText: 
-  cardImage: {fileID: 0}
-  cardType: item
+  quests:
+  - {fileID: 11400000, guid: 2fba8c0cece3da64c925b7c6375abf6e, type: 2}
