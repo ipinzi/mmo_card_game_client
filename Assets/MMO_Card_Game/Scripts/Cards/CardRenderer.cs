@@ -102,9 +102,9 @@ namespace MMO_Card_Game.Scripts.Cards
                 
                 var equipCard = (EquipmentCard) cardData;
                 levelText.text = equipCard.level.ToString();
-                ApplySummonTypeIcon(equipCard.summonType);
                 //cardFront.sprite = equipCardFrontTexture;
                 SetCardFrontTexture(equipCardFrontTexture);
+                ApplySummonTypeIcon(equipCard.summonType);
             }
             else if (cardData.GetType() == typeof(ItemCard))
             {
@@ -124,6 +124,7 @@ namespace MMO_Card_Game.Scripts.Cards
         }
         private void SetTypeIconTexture(Texture texture)
         {
+            typeIcon.enabled = true;
             typeIcon.GetPropertyBlock(_matBlock);
             _matBlock.SetTexture("_BaseMap", texture);
             typeIcon.SetPropertyBlock(_matBlock);
@@ -146,7 +147,7 @@ namespace MMO_Card_Game.Scripts.Cards
         {
             if (!Application.isPlaying) return;
             
-            ClearEquipSlotContainers(slots);
+            ClearEquipSlotContainers();
             for(var i=0;i<slots;i++)
             {
                 var pos = equipSlotContainer.position;
@@ -154,13 +155,13 @@ namespace MMO_Card_Game.Scripts.Cards
                 var icon = Instantiate(slotIcon, pos, Quaternion.identity, equipSlotContainer);
             }
         }
-        private void ClearEquipSlotContainers(int slots)
+        private void ClearEquipSlotContainers()
         {
             if (!Application.isPlaying) return;
             
-            for(var i=0;i<slots;i++)
+            for(var i=0;i<equipSlotContainer.childCount;i++)
             {
-                DestroyImmediate(equipSlotContainer.GetChild(i).gameObject);
+                Destroy(equipSlotContainer.GetChild(i).gameObject);
             }
         }
 

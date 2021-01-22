@@ -20,4 +20,4 @@ MonoBehaviour:
   cardImage: {fileID: 2800000, guid: 530e44244d59dca4a8b351d9e8224a78, type: 3}
   cardType: equipment
   level: 1
-  summonType: 0
+  summonType: 6
