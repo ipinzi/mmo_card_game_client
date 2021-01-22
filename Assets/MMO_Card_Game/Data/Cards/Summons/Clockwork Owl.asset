@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0aef3775-b386-43d0-b80b-94e367bf4e50
   cardName: Clockwork Owl
-  cardText: 
-  cardImage: {fileID: 21300000, guid: 5680718d36727bc41b967e241fb7f85a, type: 3}
+  cardText: An iron golem built by a wizard with a penchant for watch making.
+  cardSprite: {fileID: 1195563373980058504, guid: 42cbb786d8ff4af4a9d51276ae892cc1,
+    type: 3}
+  cardImage: {fileID: 2800000, guid: bd2ea5c10efbfc9418b976e37a2d1b4e, type: 3}
   cardType: summon
   attack: 1
   defense: 4
-  summonType: 0
+  summonType: 1
+  level: 1
+  equipSlots: 1

@@ -8,8 +8,9 @@ namespace MMO_Card_Game.Scripts.Cards
         Mech,
         Flare,
         Shock,
-        Frost,
-        Gaia
+        Water,
+        Gaia,
+        None
     }
     public class SummonCard : Card
     {
@@ -19,5 +20,9 @@ namespace MMO_Card_Game.Scripts.Cards
         public int defense;
         [TableColumnWidth(30, true)]
         public SummonType summonType;
+        [TableColumnWidth(10, true)]
+        public int level = 1;
+        [TableColumnWidth(10, true)]
+        public int equipSlots = 1;
     }
 }

@@ -17,8 +17,11 @@ namespace MMO_Card_Game.Scripts.Cards
         [TableColumnWidth(200, true)]
         public string cardText = "";
         [PreviewField]
-        [TableColumnWidth(20, true)]
-        public Sprite cardImage;
+        //TODO: Possibly remove this (cardSprite) if sprite drawing functionality not needed
+        [TableColumnWidth(20, true), HideInInspector]
+        public Sprite cardSprite;
+        [TableColumnWidth(20, true), PreviewField]
+        public Texture cardImage;
         [ReadOnly]
         [TableColumnWidth(30, true)]
         public string cardType;
@@ -52,6 +55,8 @@ namespace MMO_Card_Game.Scripts.Cards
         public int attack;
         public int defense;
         public SummonType summonType;
+        public int level;
+        public int equipSlots;
         
         public CardSerializableData(Card card)
         {
@@ -65,10 +70,14 @@ namespace MMO_Card_Game.Scripts.Cards
                 attack = summonCard.attack;
                 defense = summonCard.defense;
                 summonType = summonCard.summonType;
+                level = summonCard.level;
+                equipSlots = summonCard.equipSlots;
             }
             if (card.GetType() == typeof(EquipmentCard))
             {
                 var equipCard = (EquipmentCard) card;
+                level = equipCard.level;
+                summonType = equipCard.summonType;
             }
             if (card.GetType() == typeof(ItemCard))
             {

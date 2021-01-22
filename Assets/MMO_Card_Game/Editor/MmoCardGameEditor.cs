@@ -51,7 +51,7 @@ namespace Editor
             tree.AddAllAssetsAtPath("Cards", "Assets/MMO_Card_Game/Data/Cards/", typeof(Card), true)
                 .ForEach(this.AddDragHandles);
             
-            tree.EnumerateTree().AddIcons<Card>(x => x.cardImage);
+            tree.EnumerateTree().AddIcons<Card>(x => x.cardSprite);
             
             tree.Add("Cards/Summons", new SummonMmoEditorPane(_cardDatabase.cards));
             tree.Add("Cards/Equipment", new EquipmentMmoEditorPane(_cardDatabase.cards));
