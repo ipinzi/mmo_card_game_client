@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - FormFeedback
+  - CenterPoint
+  - Waypoint
+  - Lifepoints
   layers:
   - Default
   - TransparentFX
@@ -19,8 +22,8 @@ TagManager:
   - CardImage
   - CardText
   - CardImageOverlays
-  - 
-  - 
+  - Grid
+  - Grid2
   - 
   - 
   - 

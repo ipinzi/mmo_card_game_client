@@ -29,7 +29,7 @@ namespace MMO_Card_Game.Scripts.Player
         {
             Game.LocalPlayer = this;
             
-            decks = new List<Deck>();
+            //decks = new List<Deck>();
         }
     }
 }

@@ -51,6 +51,7 @@ namespace MMO_Card_Game.Scripts.Cards
         {
             CardRefreshRender();
         }
+        [Button("Refresh")]
         private void CardRefreshRender()
         {
             _matBlock = new MaterialPropertyBlock();

@@ -26,6 +26,8 @@ namespace MMO_Card_Game.Scripts.Cards
         [TableColumnWidth(30, true)]
         public string cardType;
 
+        [TableColumnWidth(30, true)] public int ap;
+
         private void Awake()
         {
             cardName = name;
@@ -57,6 +59,7 @@ namespace MMO_Card_Game.Scripts.Cards
         public SummonType summonType;
         public int level;
         public int equipSlots;
+        public int ap;
         
         public CardSerializableData(Card card)
         {
@@ -64,6 +67,7 @@ namespace MMO_Card_Game.Scripts.Cards
             cardName = card.cardName;
             cardText = card.cardText;
             cardType = card.cardType;
+            ap = card.ap;
             if (card.GetType() == typeof(SummonCard))
             {
                 var summonCard = (SummonCard) card;

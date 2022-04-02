@@ -20,8 +20,10 @@ MonoBehaviour:
     type: 3}
   cardImage: {fileID: 2800000, guid: 60bb0dd88cc28784caa129c7fc2e6c81, type: 3}
   cardType: summon
-  attack: 0
+  ap: 3
+  attack: 1
   defense: 5
   summonType: 5
   level: 3
   equipSlots: 2
+  hp: 3

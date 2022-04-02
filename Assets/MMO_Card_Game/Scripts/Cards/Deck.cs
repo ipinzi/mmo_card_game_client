@@ -10,9 +10,32 @@ namespace MMO_Card_Game.Scripts.Cards
         public string deckName;
         public List<Card> cards;
 
-        private void Awake()
+        public void Shuffle()
         {
-            cards = new List<Card>();
+            cards.Shuffle();
+        }
+
+        public Card DrawCard()
+        {
+            if (cards.Count <= 0)
+            {
+                Debug.LogWarning("No Cards to Draw with DrawCard()");
+                return null;
+            }
+            
+            var c = cards[0];
+            cards.RemoveAt(0);
+            return c;
+        }
+        public List<Card> DrawCards(int amount)
+        {
+            var list = new List<Card>();
+            for (var i = 0; i < amount; i++)
+            {
+                list.Add(DrawCard());
+            }
+
+            return list;
         }
     }
     
